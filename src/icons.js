@@ -1,4 +1,8 @@
+import { catalogArt } from './catalog-art.js?v=2.0.0';
 const paths={
+  paint:'<path d="M12 3a9 9 0 1 0 0 18h2a2 2 0 0 0 0-4h-1a2 2 0 0 1 0-4h3a5 5 0 0 0 0-10Z"/><circle cx="7" cy="9" r="1"/><circle cx="7" cy="14" r="1"/><circle cx="12" cy="7" r="1"/><circle cx="17" cy="7" r="1"/>',
+  stage:'<rect x="3" y="3" width="18" height="18" rx="3"/><path d="m3 16 5-5 5 6 4-4 4 4"/><circle cx="15" cy="8" r="2"/>',
+  map:'<path d="m3 5 6-2 6 3 6-2v15l-6 2-6-3-6 2Zm6-2v15m6-12v15"/>',
   heart:'<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/>',
   camera:'<path d="M14.5 4h-5L7 7H3a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1h-4Z"/><circle cx="12" cy="13" r="4"/>',
   rotate:'<path d="M3 10a9 9 0 1 1 2.7 8.5M3 4v6h6"/>',
@@ -22,13 +26,14 @@ export function icon(name){return `<svg viewBox="0 0 24 24" fill="none" stroke="
 export function fillIcons(root=document){root.querySelectorAll('[data-icon]').forEach(el=>el.innerHTML=icon(el.dataset.icon));}
 export function miniAvatar({hair='buns',hairColor='#765044',dressColor='#d989a4',accessory='bows',skin='#f5d5bf'}={}) {
   const buns=hair==='buns'?`<circle cx="15" cy="18" r="9" fill="${hairColor}"/><circle cx="49" cy="18" r="9" fill="${hairColor}"/>`:'';
-  const long=['long','braids','ponytail'].includes(hair)?`<path d="M14 24h36l4 32H10Z" fill="${hairColor}"/>`:'';
+  const long=['long','braids','ponytail','hime','curls','sidebraid'].includes(hair)?`<path d="M14 24h36l4 32H10Z" fill="${hairColor}"/>`:hair==='twintails'?`<ellipse cx="10" cy="39" rx="8" ry="21" fill="${hairColor}"/><ellipse cx="54" cy="39" rx="8" ry="21" fill="${hairColor}"/>`:'';
   return `<svg viewBox="0 0 64 72" aria-hidden="true">${long}${buns}<path d="m23 47-8 20h34l-8-20" fill="${dressColor}"/><path d="M23 47q9 10 18 0" fill="#fff9f0"/><ellipse cx="32" cy="29" rx="22" ry="24" fill="${hairColor}"/><ellipse cx="32" cy="32" rx="19" ry="20" fill="${skin}"/><path d="M12 28C10 0 51 0 52 28c-9-1-16-8-19-14-2 8-11 11-21 14" fill="${hairColor}"/><ellipse cx="25" cy="32" rx="2.5" ry="3.3" fill="#553e3b"/><ellipse cx="39" cy="32" rx="2.5" ry="3.3" fill="#553e3b"/><circle cx="24.5" cy="31" r=".9" fill="white"/><circle cx="38.5" cy="31" r=".9" fill="white"/><ellipse cx="20" cy="38" rx="3.6" ry="1.8" fill="#e6a3a0" opacity=".6"/><ellipse cx="44" cy="38" rx="3.6" ry="1.8" fill="#e6a3a0" opacity=".6"/><path d="M29 40q3 3 6 0" fill="none" stroke="#b2746b" stroke-width="1.2" stroke-linecap="round"/>${accessory==='bows'?'<path d="M46 19c-17-13-8-19 0-7 11-8 13 7 0 7" fill="#e4a3b9"/>':accessory==='crown'?'<path d="m21 10-2-10 8 6 5-6 5 6 8-6-2 10Z" fill="#e7c37c"/>':accessory==='flower'?'<g fill="#fff9dc"><circle cx="47" cy="17" r="5"/><circle cx="51" cy="21" r="5"/><circle cx="43" cy="21" r="5"/></g><circle cx="47" cy="21" r="3" fill="#dab972"/>':''}</svg>`;
 }
 export function optionIllustration(key,id,state){
+  const extra=catalogArt(key,id,state);if(extra)return extra;
   const start='<svg viewBox="0 0 80 75" aria-hidden="true">',end='</svg>';
   if(key==='face') {
-    const shape={round:'M17 34c0-27 46-27 46 0v7c0 30-46 30-46 0Z',oval:'M20 33c0-30 40-30 40 0v10c0 29-40 29-40 0Z',heart:'M16 31c0-25 48-25 48 0 0 21-16 34-24 37-8-3-24-16-24-37Z',cheeky:'M17 31c0-23 46-23 46 0 17 35-63 46-46 0Z',petal:'M18 31C13 7 67 7 62 31c0 18-10 33-22 35-12-2-22-17-22-35Z',bean:'M19 32c0-25 42-25 42 0 0 19-7 27-21 29-14-2-21-10-21-29Z'}[id];
+    const shape={round:'M17 34c0-27 46-27 46 0v7c0 30-46 30-46 0Z',oval:'M20 33c0-30 40-30 40 0v10c0 29-40 29-40 0Z',heart:'M16 31c0-25 48-25 48 0 0 21-16 34-24 37-8-3-24-16-24-37Z',cheeky:'M17 31c0-23 46-23 46 0 17 35-63 46-46 0Z',petal:'M18 31C13 7 67 7 62 31c0 18-10 33-22 35-12-2-22-17-22-35Z',bean:'M19 32c0-25 42-25 42 0 0 19-7 27-21 29-14-2-21-10-21-29Z',peach:'M17 30c0-27 46-27 46 0 8 22-13 37-23 36-10 1-31-14-23-36Z',bubble:'M14 36c0-30 52-30 52 0 0 36-52 36-52 0Z',elf:'M22 30c0-25 36-25 36 0l10-3-9 17c-4 12-10 19-19 23-9-4-15-11-19-23l-9-17Z'}[id];
     return `${start}<defs><radialGradient id="skin-${id}" cx="35%" cy="30%"><stop stop-color="#fce6d2"/><stop offset="1" stop-color="#ecc1a6"/></radialGradient></defs><ellipse cx="40" cy="68" rx="16" ry="2" fill="#e5d1c1" opacity=".25"/><path d="${shape}" fill="url(#skin-${id})" stroke="#e8bda5" stroke-width=".6"/><ellipse cx="17" cy="39" rx="3" ry="5" fill="#efc7b0"/><ellipse cx="63" cy="39" rx="3" ry="5" fill="#efc7b0"/><circle cx="31" cy="37" r="2" fill="#85645b"/><circle cx="49" cy="37" r="2" fill="#85645b"/><path d="M37 47q3 3 6 0" stroke="#bf8a79" fill="none" stroke-linecap="round"/><ellipse cx="26" cy="44" rx="5" ry="2.5" fill="#e7a29d" opacity=".35"/><ellipse cx="54" cy="44" rx="5" ry="2.5" fill="#e7a29d" opacity=".35"/>${end}`;
   }
   if(key==='hair')return miniAvatar({...state,hair:id,accessory:'none'});
