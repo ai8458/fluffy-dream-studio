@@ -1,0 +1,44 @@
+const paths={
+  heart:'<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/>',
+  camera:'<path d="M14.5 4h-5L7 7H3a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1h-4Z"/><circle cx="12" cy="13" r="4"/>',
+  rotate:'<path d="M3 10a9 9 0 1 1 2.7 8.5M3 4v6h6"/>',
+  reset:'<path d="M4 10a8 8 0 1 1 2.3 8M4 4v6h6"/><path d="M12 7v5l3 2"/>',
+  undo:'<path d="m8 4-5 5 5 5M3 9h11a6 6 0 0 1 0 12"/>',
+  redo:'<path d="m16 4 5 5-5 5m5-5H10a6 6 0 0 0 0 12"/>',
+  shuffle:'<path d="m16 3 4 4-4 4m0 2 4 4-4 4M3 5c7 0 7 12 14 12h3M3 19c7 0 7-12 14-12h3"/>',
+  pencil:'<path d="m16 3 5 5M3 21l5-1L21 7a2 2 0 0 0-5-4L3 16Z"/>',
+  drag:'<path d="m3 12 3-3m-3 3 3 3m15-3-3-3m3 3-3 3M3 12h18"/>',
+  sparkles:'<path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5ZM21 2v4m-2-2h4"/>',
+  close:'<path d="m6 6 12 12M6 18 18 6"/>',
+  'sound-off':'<path d="m11 5-6 4H2v6h3l6 4ZM16 9l6 6m-6 0 6-6"/>',
+  sound:'<path d="m11 5-6 4H2v6h3l6 4ZM15 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/>',
+  face:'<path d="M4 9c0-9 16-9 16 0v4c0 10-16 10-16 0Z"/><path d="M8 11v1m8-1v1m-7 4c2 2 4 2 6 0"/>',
+  hair:'<path d="M4 19C0 6 6 2 12 2s12 4 8 17M5 11c3 0 6-2 7-5 1 3 4 5 7 5M6 12c0 13 12 13 12 0"/>',
+  eyes:'<path d="M2 12s4-6 10-6 10 6 10 6-4 6-10 6S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/>',
+  outfit:'<path d="m8 3-6 4 3 5 3-2-3 11h14l-3-11 3 2 3-5-6-4c0 4-8 4-8 0Z"/>',
+  accessory:'<path d="M12 10C0-5-2 20 12 14 26 20 24-5 12 10Z"/><circle cx="12" cy="12" r="2"/><path d="m10 15-3 6 5-2 5 2-3-6"/>'
+};
+export function icon(name){return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths[name]||paths.sparkles}</svg>`;}
+export function fillIcons(root=document){root.querySelectorAll('[data-icon]').forEach(el=>el.innerHTML=icon(el.dataset.icon));}
+export function miniAvatar({hair='buns',hairColor='#765044',dressColor='#d989a4',accessory='bows',skin='#f5d5bf'}={}) {
+  const buns=hair==='buns'?`<circle cx="15" cy="18" r="9" fill="${hairColor}"/><circle cx="49" cy="18" r="9" fill="${hairColor}"/>`:'';
+  const long=['long','braids','ponytail'].includes(hair)?`<path d="M14 24h36l4 32H10Z" fill="${hairColor}"/>`:'';
+  return `<svg viewBox="0 0 64 72" aria-hidden="true">${long}${buns}<path d="m23 47-8 20h34l-8-20" fill="${dressColor}"/><path d="M23 47q9 10 18 0" fill="#fff9f0"/><ellipse cx="32" cy="29" rx="22" ry="24" fill="${hairColor}"/><ellipse cx="32" cy="32" rx="19" ry="20" fill="${skin}"/><path d="M12 28C10 0 51 0 52 28c-9-1-16-8-19-14-2 8-11 11-21 14" fill="${hairColor}"/><ellipse cx="25" cy="32" rx="2.5" ry="3.3" fill="#553e3b"/><ellipse cx="39" cy="32" rx="2.5" ry="3.3" fill="#553e3b"/><circle cx="24.5" cy="31" r=".9" fill="white"/><circle cx="38.5" cy="31" r=".9" fill="white"/><ellipse cx="20" cy="38" rx="3.6" ry="1.8" fill="#e6a3a0" opacity=".6"/><ellipse cx="44" cy="38" rx="3.6" ry="1.8" fill="#e6a3a0" opacity=".6"/><path d="M29 40q3 3 6 0" fill="none" stroke="#b2746b" stroke-width="1.2" stroke-linecap="round"/>${accessory==='bows'?'<path d="M46 19c-17-13-8-19 0-7 11-8 13 7 0 7" fill="#e4a3b9"/>':accessory==='crown'?'<path d="m21 10-2-10 8 6 5-6 5 6 8-6-2 10Z" fill="#e7c37c"/>':accessory==='flower'?'<g fill="#fff9dc"><circle cx="47" cy="17" r="5"/><circle cx="51" cy="21" r="5"/><circle cx="43" cy="21" r="5"/></g><circle cx="47" cy="21" r="3" fill="#dab972"/>':''}</svg>`;
+}
+export function optionIllustration(key,id,state){
+  const start='<svg viewBox="0 0 80 75" aria-hidden="true">',end='</svg>';
+  if(key==='face') {
+    const shape={round:'M17 34c0-27 46-27 46 0v7c0 30-46 30-46 0Z',oval:'M20 33c0-30 40-30 40 0v10c0 29-40 29-40 0Z',heart:'M16 31c0-25 48-25 48 0 0 21-16 34-24 37-8-3-24-16-24-37Z',cheeky:'M17 31c0-23 46-23 46 0 17 35-63 46-46 0Z',petal:'M18 31C13 7 67 7 62 31c0 18-10 33-22 35-12-2-22-17-22-35Z',bean:'M19 32c0-25 42-25 42 0 0 19-7 27-21 29-14-2-21-10-21-29Z'}[id];
+    return `${start}<defs><radialGradient id="skin-${id}" cx="35%" cy="30%"><stop stop-color="#fce6d2"/><stop offset="1" stop-color="#ecc1a6"/></radialGradient></defs><ellipse cx="40" cy="68" rx="16" ry="2" fill="#e5d1c1" opacity=".25"/><path d="${shape}" fill="url(#skin-${id})" stroke="#e8bda5" stroke-width=".6"/><ellipse cx="17" cy="39" rx="3" ry="5" fill="#efc7b0"/><ellipse cx="63" cy="39" rx="3" ry="5" fill="#efc7b0"/><circle cx="31" cy="37" r="2" fill="#85645b"/><circle cx="49" cy="37" r="2" fill="#85645b"/><path d="M37 47q3 3 6 0" stroke="#bf8a79" fill="none" stroke-linecap="round"/><ellipse cx="26" cy="44" rx="5" ry="2.5" fill="#e7a29d" opacity=".35"/><ellipse cx="54" cy="44" rx="5" ry="2.5" fill="#e7a29d" opacity=".35"/>${end}`;
+  }
+  if(key==='hair')return miniAvatar({...state,hair:id,accessory:'none'});
+  if(key==='outfit'){
+    const color=state.dressColor;
+    const top=id==='cozy'?`<path d="m25 16-17 9 8 17 9-4-3 29h36l-3-29 9 4 8-17-17-9" fill="${color}"/>`:`<path d="m27 17-13 10 6 14 7-4-12 30h50L53 37l7 4 6-14-13-10" fill="${color}"/>`;
+    return `${start}<ellipse cx="40" cy="69" rx="25" ry="2" fill="#dbc3ca" opacity=".25"/>${top}<path d="M27 17q13 15 26 0" fill="#fff9f2"/><path d="M29 18q11 6 22 0" stroke="#fff7f0" stroke-width="4" fill="none"/>${id==='strawberry'?'<path d="M34 41c-10-5-8 10 6 17 14-7 16-22 6-17l-6 1Z" fill="#c45e77"/><path d="m34 41 6-6 6 6" fill="#8fa987"/><g fill="#f9daba"><circle cx="37" cy="46" r="1"/><circle cx="43" cy="47" r="1"/><circle cx="40" cy="51" r="1"/></g>':id==='sailor'?'<path d="m27 18 13 15 13-15" stroke="#7593b7" fill="none" stroke-width="4"/><path d="m40 33-5 11 5-2 5 2Z" fill="#6f89ac"/>':id==='overalls'?'<path d="M28 20v22m24-22v22" stroke="#e9d79b" stroke-width="5"/><rect x="32" y="40" width="16" height="14" rx="4" fill="#d5dfbc"/>':id==='princess'?'<path d="m40 39 2 5 6 1-5 4 1 6-4-3-4 3 1-6-5-4 6-1Z" fill="#f9e7b1"/><path d="M20 57q20 13 40 0" fill="none" stroke="#fff8ed" stroke-width="2"/>':id==='ballet'?'<path d="M40 32C22 14 22 46 40 36c18 10 18-22 0-4" fill="#fff1ed"/><path d="m16 58 48 0" stroke="#fff5f2" stroke-width="2"/>':'<path d="M28 32v28m8-30v30m8-30v30m8-28v28" stroke="#fff" stroke-opacity=".25" stroke-width="2"/>'}${end}`;
+  }
+  if(key==='eyes')return `${start}<ellipse cx="40" cy="37" rx="32" ry="25" fill="#f9e9de"/>${id==='gentle'?'<path d="M17 37q8-12 15 0m16 0q8-12 15 0" stroke="#79534b" fill="none" stroke-width="3" stroke-linecap="round"/>':`<g fill="${state.eyeColor}"><ellipse cx="25" cy="36" rx="${id==='round'?8:7}" ry="10"/><ellipse cx="55" cy="36" rx="${id==='round'?8:7}" ry="10"/></g><g fill="white"><circle cx="23" cy="32" r="3"/><circle cx="53" cy="32" r="3"/><circle cx="28" cy="40" r="1.4"/><circle cx="58" cy="40" r="1.4"/></g>`}<ellipse cx="17" cy="48" rx="7" ry="3" fill="#edbbc0"/><ellipse cx="63" cy="48" rx="7" ry="3" fill="#edbbc0"/>${end}`;
+  if(key==='mouth')return `${start}<ellipse cx="40" cy="37" rx="28" ry="24" fill="#f9e9de"/>${id==='smile'?'<path d="M30 35q10 14 20 0" stroke="#bc7c7c" stroke-width="3" fill="none" stroke-linecap="round"/>':id==='cat'?'<path d="M25 36q7 12 15 0 8 12 15 0" stroke="#bc7c7c" stroke-width="3" fill="none" stroke-linecap="round"/>':'<ellipse cx="40" cy="39" rx="6" ry="8" fill="#bd7d7c"/><ellipse cx="40" cy="43" rx="4" ry="3" fill="#e7a8a9"/>'}${end}`;
+  const drawings={bows:'<path d="M40 30C0-8-3 63 37 45l-6 20 9-5 9 5-6-20C83 63 80-8 40 30" fill="#dea0b5"/><ellipse cx="40" cy="37" rx="6" ry="8" fill="#cc86a0"/>',flower:'<g fill="#fff4da" stroke="#e6d8b5"><ellipse cx="40" cy="24" rx="8" ry="14"/><ellipse cx="40" cy="52" rx="8" ry="14"/><ellipse cx="26" cy="38" rx="14" ry="8"/><ellipse cx="54" cy="38" rx="14" ry="8"/></g><circle cx="40" cy="38" r="10" fill="#e3bf75"/>',bunny:'<path d="M21 57C3-9 35-12 34 51M46 51C45-12 77-9 59 57" fill="#fff7f3" stroke="#e9dcd7" stroke-width="1.5"/><path d="M25 44c-10-38 5-34 5 0m20 0c0-34 15-38 5 0" fill="#e9b5c4"/><path d="M21 57q19-13 38 0" stroke="#d6afbf" stroke-width="5" fill="none"/>',crown:'<path d="m13 22 13 11L40 12l14 21 13-11-6 37H19Z" fill="#ecd199" stroke="#dbba77" stroke-width="1.5"/><path d="m36 41 4-5 4 5-4 5Z" fill="#d7a6bb"/><circle cx="13" cy="21" r="3" fill="#ebce91"/><circle cx="40" cy="12" r="3" fill="#ebce91"/><circle cx="67" cy="21" r="3" fill="#ebce91"/>',glasses:'<g stroke="#c191a6" stroke-width="3" fill="#fff" fill-opacity=".5"><circle cx="23" cy="37" r="14"/><circle cx="57" cy="37" r="14"/><path d="M37 37h6M3 31l6 3m62 0 6-3"/></g><path d="m16 28 6-3m27 3 6-3" stroke="white" stroke-width="3" stroke-linecap="round"/>',none:'<circle cx="40" cy="37" r="22" stroke="#dbcbd2" stroke-width="2" stroke-dasharray="3 5" fill="none"/><path d="m33 37 5 5 10-11" stroke="#c8b4bf" stroke-width="2" fill="none" stroke-linecap="round"/>'};
+  return start+(drawings[id]||'')+end;
+}

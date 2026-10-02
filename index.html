@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#fff8f5">
+  <meta name="description" content="在绒绒造梦屋，捏一个独一无二的软萌 3D 娃娃。自由捏脸、换装、收藏和拍照，所有可爱都由你决定。">
+  <title>绒绒造梦屋 · 今天的可爱，由你创造</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="绒绒造梦屋首页"><span class="brand-mark"><svg viewBox="0 0 44 44" fill="none"><path d="M10 20C3 3 17 1 19 16M25 16C28 0 42 4 34 21" stroke="currentColor" stroke-width="5" stroke-linecap="round"/><path d="M37 27c0 10-7 13-15 13S7 37 7 27 14 14 22 14s15 3 15 13Z" fill="currentColor"/><circle cx="16" cy="26" r="1.8" fill="white"/><circle cx="28" cy="26" r="1.8" fill="white"/><path d="m20 31 2 2 2-2" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></span><span><strong>绒绒造梦屋</strong><small>FLUFFY DREAM STUDIO</small></span></a>
+    <nav class="main-nav" aria-label="主导航"><button class="nav-link active" data-action="studio">捏脸工坊<span></span></button><button class="nav-link" data-action="gallery">我的收藏 <span class="collection-count" id="collection-count">0</span></button><button class="nav-link" data-action="help">玩法小贴士</button></nav>
+    <div class="header-actions"><button class="icon-button sound-button" data-action="sound" aria-label="开启音乐" aria-pressed="false" title="开启音乐"><span data-icon="sound-off"></span></button><button class="button primary save-button" data-action="save"><span data-icon="heart"></span><span>收藏这份可爱</span></button></div>
+  </header>
+
+  <main class="workspace">
+    <section class="play-area" aria-label="3D 娃娃展示区">
+      <div class="intro"><div><div class="eyebrow"><span class="tiny-star">✦</span> A LITTLE WORLD OF YOU</div><h1>今天的可爱，<span>由你创造。</span></h1><p>把小小的灵感，变成独一无二的自己。</p></div><span class="handwritten">Hello, cutie!<svg viewBox="0 0 95 30"><path d="M3 5c24 26 51 25 83 8m-10-3 13 1-3 12"/></svg></span></div>
+      <div class="stage" id="stage">
+        <div class="stage-glow"></div><div class="stage-ring ring-one"></div><div class="stage-ring ring-two"></div>
+        <div class="stage-topline"><span class="live-label"><i></i> 你的专属小可爱</span><div class="view-switch" aria-label="展示视角"><button class="active" data-view="full" aria-pressed="true">全身</button><button data-view="face" aria-pressed="false">特写</button></div></div>
+        <div class="stage-decoration star star-a">✧</div><div class="stage-decoration star star-b">✦</div><div class="stage-decoration star star-c">✧</div><div class="stage-decoration bubble bubble-a"></div><div class="stage-decoration bubble bubble-b"></div>
+        <div class="floating-note"><span>♡</span> 可爱没有标准答案</div>
+        <canvas id="avatar-canvas" aria-label="可拖动旋转的 3D 娃娃，左右方向键也可以旋转" tabindex="0"></canvas>
+        <div class="loading" id="loading"><span class="loading-bunny">✦</span>正在唤醒你的小可爱…</div>
+        <button class="stage-tool camera-button" data-action="photo" title="拍照下载" aria-label="拍照下载"><span data-icon="camera"></span></button>
+        <button class="stage-tool reset-camera" data-action="reset-camera" title="回到正面" aria-label="回到正面"><span data-icon="rotate"></span></button>
+        <div class="avatar-name"><span class="name-sparkle">✦</span><input id="avatar-name" value="草莓绒绒" aria-label="给娃娃起个名字" maxlength="12"><span data-icon="pencil"></span></div>
+        <div class="drag-hint"><span data-icon="drag"></span>拖动转一转，发现每一面的可爱</div>
+      </div>
+      <div class="stage-actions"><button class="button random-button" data-action="random"><span data-icon="shuffle"></span>来点小惊喜<span class="new-badge">✦</span></button><div class="history-actions"><button class="icon-button" data-action="undo" aria-label="撤销上一步" title="撤销上一步" disabled><span data-icon="undo"></span></button><button class="icon-button" data-action="redo" aria-label="重做" title="重做" disabled><span data-icon="redo"></span></button><span class="divider"></span><button class="reset-button" data-action="reset"><span data-icon="reset"></span>重新开始</button></div></div>
+      <div class="inspiration"><div class="inspiration-heading"><span><span class="tiny-star">✷</span> 灵感小衣橱</span><small>一键换上好心情</small></div><div class="preset-list" id="preset-list"></div></div>
+    </section>
+
+    <aside class="customizer" aria-label="娃娃造型编辑器"><div class="panel-heading"><div><span class="eyebrow">MAKE IT YOURS</span><h2>一点点，变成喜欢的样子<span>♡</span></h2></div><span class="step-badge" id="step-badge">01 / 05</span></div><div class="category-tabs" role="tablist" aria-label="造型分类" id="category-tabs"></div><div class="controls-scroll" id="controls-panel" role="tabpanel" tabindex="0"></div><div class="panel-footer"><span data-icon="sparkles"></span><span>每一种模样，都值得被喜欢。</span><span>♡</span></div></aside>
+  </main>
+  <footer class="site-footer"><span>MADE OF LITTLE DREAMS & LOTS OF LOVE</span><span><i></i> 自由玩耍 · 无需登录 · 本地保存</span></footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div><div class="photo-flash" id="photo-flash"></div>
+  <dialog id="modal"><button class="modal-close icon-button" data-action="close-modal" aria-label="关闭弹窗"><span data-icon="close"></span></button><div id="modal-content"></div></dialog>
+  <noscript><p class="noscript">请开启 JavaScript 来唤醒你的 3D 小可爱。</p></noscript>
+  <script type="module" src="./src/app.js"></script>
+</body>
+</html>
